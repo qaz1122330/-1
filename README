@@ -24,7 +24,7 @@
 1. 克隆项目
 bash
 
-git clone https://github.com/qaz1122330/industrial-meter-reading.git
+git clone https://github.com/qaz1122330/-1.git
 cd industrial-meter-reading
 
 2. 安装依赖
