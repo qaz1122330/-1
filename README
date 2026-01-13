@@ -1,0 +1,125 @@
+工业仪表盘智能读数与预警系统
+
+基于计算机视觉的工业自动化监测系统，实现对工厂监控视频中仪表盘的自动识别、数值读取与异常预警，替代传统人工巡检。
+✨ 核心功能
+
+    🔍 仪表自动检测：使用YOLOv8实时检测视频流中的仪表盘位置
+
+    📊 智能读数：通过图像处理技术自动识别指针角度，转换为物理读数
+
+    ⚠️ 实时预警：读数超过阈值时自动触发预警通知
+
+    📈 数据可视化：Web界面实时展示读数曲线与设备状态
+
+    🎥 视频流处理：支持实时视频流与录像文件分析
+
+🚀 快速开始
+环境要求
+
+    Python 3.8+
+
+    摄像头或视频文件（可选，系统提供模拟视频源）
+
+安装步骤
+1. 克隆项目
+bash
+
+git clone https://github.com/qaz1122330/industrial-meter-reading.git
+cd industrial-meter-reading
+
+2. 安装依赖
+bash
+
+pip install -r requirements.txt
+
+3. 启动系统
+bash
+
+python app.py
+
+4. 开始使用
+
+打开浏览器访问：http://localhost:5000
+📁 项目结构
+text
+
+industrial-meter-reading/
+├── app.py                    # Flask主应用（WebSocket服务器）
+├── meter_detector.py         # 仪表检测与读数核心模块
+├── requirements.txt          # Python依赖包
+├── static/                  # 静态资源
+│   └── style.css           # 样式表
+├── templates/               # 前端模板
+│   └── index.html          # 主界面
+└── README.md               # 项目说明
+
+🔧 技术栈
+
+    后端框架: Python, Flask, Flask-SocketIO
+
+    计算机视觉: OpenCV, 模拟YOLOv8检测算法
+
+    实时通信: WebSocket, Socket.IO
+
+    前端技术: HTML5, CSS3, JavaScript, Chart.js
+
+    数据处理: NumPy
+
+📊 系统特点
+
+    完整架构：提供从视频处理到Web展示的完整解决方案
+
+    实时性强：WebSocket保证数据的实时传输（<500ms延迟）
+
+    易于部署：纯Python实现，依赖简单
+
+    可扩展性：模块化设计，可轻松替换为真实YOLO模型
+
+    美观界面：现代化Dashboard设计，数据可视化清晰
+
+🎯 应用场景
+
+    工厂设备状态监测
+
+    电力系统仪表巡检
+
+    实验室设备自动化记录
+
+    教学演示与原型验证
+
+📝 开发说明
+
+当前版本为演示系统，包含：
+
+    ✅ 完整的Web应用架构
+
+    ✅ 实时视频流模拟
+
+    ✅ 仪表读数算法模拟
+
+    ✅ WebSocket实时通信
+
+    ✅ 数据可视化图表
+
+    ✅ 阈值预警系统
+
+实际工业部署时，只需：
+
+    将 meter_detector.py 中的模拟算法替换为真实YOLO模型
+
+    连接真实的摄像头或RTSP视频流
+
+    根据实际仪表校准读数参数
+
+🐳 一键运行
+bash
+
+# 快速测试（确保在项目目录下）
+pip install flask flask-socketio eventlet opencv-python numpy
+python app.py
+
+📞 联系我们
+
+如有问题或建议，请在GitHub提交Issue。
+
+⭐ 如果这个项目对你有帮助，请给我们一个Star！
