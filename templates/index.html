@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>工业仪表读数系统</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 30px; }
+        .meter-card { 
+            border: 1px solid #ddd; 
+            padding: 20px; 
+            margin: 10px; 
+            border-radius: 8px;
+            display: inline-block;
+            width: 45%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏭 工业仪表盘智能读数系统</h1>
+            <p>基于计算机视觉的自动化监测系统</p>
+        </div>
+        
+        <div id="meters-container">
+            <!-- 仪表卡片将通过JavaScript动态生成 -->
+            <div class="meter-card">
+                <h3>仪表-1</h3>
+                <div class="value">--.--</div>
+                <div class="status">等待数据...</div>
+            </div>
+        </div>
+        
+        <div style="margin-top: 30px;">
+            <button onclick="startMonitoring()">开始监控</button>
+            <button onclick="stopMonitoring()">停止监控</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.5.0/socket.io.min.js"></script>
+    <script>
+        let socket = null;
+        
+        function connectWebSocket() {
+            socket = io();
+            
+            socket.on('connect', function() {
+                console.log('已连接到服务器');
+                document.getElementById('connection-status').innerText = '✅ 已连接';
+            });
+            
+            socket.on('meter_data', function(data) {
+                updateMeters(data.readings);
+            });
+        }
+        
+        function updateMeters(readings) {
+            const container = document.getElementById('meters-container');
+            let html = '';
+            
+            readings.forEach(meter => {
+                html += `
+                    <div class="meter-card">
+                        <h3>仪表-${meter.id + 1}</h3>
+                        <div class="value" style="font-size: 24px; font-weight: bold;">
+                            ${meter.value}
+                        </div>
+                        <div class="status">
+                            状态: ${meter.status} | 角度: ${meter.angle}°
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+        
+        function startMonitoring() {
+            if (socket) {
+                socket.emit('start_monitoring');
+                console.log('开始监控...');
+            }
+        }
+        
+        window.onload = function() {
+            connectWebSocket();
+        };
+    </script>
+</body>
+</html>
